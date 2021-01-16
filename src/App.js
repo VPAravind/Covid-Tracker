@@ -13,6 +13,7 @@ import InfoBox from './InfoBox';
 import {sortData,prettyPrintStat} from './util';
 import LineGraph from './LineGraph'
 import "leaflet/dist/leaflet.css";
+
 function App() {
   const [countries,setCountries]=useState([]);
   const [country,setCountry]=useState('worldwide');
@@ -58,8 +59,10 @@ const onCountryChange=async(event)=>{
   .then (data=>{
     setCountry(countryCode);
     setCountryInfo(data);
-    setMapCenter(countryCode==='worldwide'?[data.countryInfo.lat,data.countryInfo.long]:[34.80746,-40.4796])
-    setMapZoom(4);
+    setMapCenter(countryCode==='worldwide'?{lat:data.countryInfo.lat,lng:data.countryInfo.lng}:{lat:34.80746,lng:-40.4796})
+    //   countryCode==='worldwide'?map.panTo(new L.LatLng(34.80746,-40.4796)):map.panTo(new L.LatLng(34.80746,-40.4796));
+
+      setMapZoom(4);
   })
 
 
@@ -73,12 +76,13 @@ const onCountryChange=async(event)=>{
      <div className="app_header">
      <h1>COVID-19 TRACKER </h1>
      <FormControl className="app_dropdown">
-       <Select variant="outlined" onChange={onCountryChange} value={country}>
+       <Select variant="outlined" onChange={onCountryChange} value={country} style={{backgroundColor: '#bbe1fa',
+           color:'#1b262c', fontWeight:'bold'}}>
         
-           <MenuItem value ="worldwide">Worldwide</MenuItem>
+           <MenuItem value ="worldwide" style={{backgroundColor: '#bbe1fa', color:'#1b262c'}}>Worldwide</MenuItem>
           {
             countries.map(country=>(
-              <MenuItem value={country.value}>{country.name}</MenuItem>
+              <MenuItem value={country.value} style={{backgroundColor: '#bbe1fa', color:'#1b262c'}}>{country.name}</MenuItem>
             ))
           }
        </Select>

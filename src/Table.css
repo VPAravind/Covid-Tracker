@@ -13,6 +13,15 @@
     padding:0.5rem;
 }
 .table tr:nth-of-type(odd){
-    background-color: #f3f2f8;
+    background-color: #bbe1fa;
+    color:#000000;
+    font-weight:bold;
+
+}
+
+.table tr:nth-of-type(even){
+    background-color: #0f4c75;
+    color: #ffffff;
+    font-weight:bold;
 
 }
